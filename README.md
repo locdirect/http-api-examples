@@ -1,5 +1,7 @@
 # http-api-examples
-Python examples of LocDirect HTTP(s) API usage 
+Python examples of how to use LocalizeDirect's localization tool LocDirect HTTP(s) API usage 
+
+Download the LocDirect API documentation [here](http://localizedirect.com/locdirect_downloads/)
 
 * Create project "SwedishSource"
 
@@ -7,6 +9,7 @@ Add English and Swedish languages
 Set Swedish as source language
 
 Add two strings:
+
 ![image alt text](https://raw.github.com/locdirect/http-api-examples/master/images/image_0.png)
 
 * Create project "EnglishSource"
@@ -17,6 +20,7 @@ Set English as source language
 * Add API user 
 
 Make it a development type of user
+
 ![image alt text](https://raw.github.com/locdirect/http-api-examples/master/images/image_1.png)
 
 Edit both projects and add the user as "Project Member(s)":
@@ -29,6 +33,7 @@ Edit both projects and add the user as "Project Member(s)":
 
 Lets try out the exporter command ld_http_exporter.py
 It has the following arguments:
+
 ```
   -h, --help            show this help message and exit
 
@@ -72,7 +77,10 @@ Notice how the " comes out as “" we use double quotations for managing quotes 
 Running the same but using json as format instead of csv generates:
 
 ```json
-[{"text_enUS": "Hello", "path": "Strings/", "sourceLanguageText": "Hejsan", "identifierName": "str_1"}, {"text_enUS": "", "path": "Strings/", "sourceLanguageText": "\"qoute test\"", "identifierName": "str_2"}]
+[
+    {"text_enUS": "Hello", "path": "Strings/", "sourceLanguageText": "Hejsan", "identifierName": "str_1"}, 
+    {"text_enUS": "", "path": "Strings/", "sourceLanguageText": "\"qoute test\"", "identifierName": "str_2"}
+]
 ```
 
 Notice that in json the " comes out as \"
@@ -80,8 +88,8 @@ Notice that in json the " comes out as \"
 ##IMPORTER SCRIPT
 
 Now, delete the two exported strings from the SwedishSource project and we’ll import the test.csv file into the project again. The importer can only import csv files - however, you can change the script to add additional format support.
-```
 
+```
   -h, --help            show this help message and exit
 
   -u USER, --user USER  User name
@@ -126,8 +134,8 @@ When English is not the source language of a project a usual process is to trans
 The fields input is used to copy over additional fields such as description or custom fields.
 
 The language input should be the language and country code for the target language in the source project and the language you wish to make the source in the second project. In our example that would be English, so the input should be enUS
-```
 
+```
   -h, --help            show this help message and exit
 
   -u USER, --user USER  User name
@@ -236,7 +244,7 @@ If you plan to use the updater script for your project here’s a few things to 
 
 Folders will be created in the destination project but if the source project folder name is renamed, one of two things will happen:
 
-If you use the project setting "String Identifiers must be unique in project" then the the renamed folder will be created in the destination project but any existing strings that already had been added to the destination will stay in their original folder. 
+If you use the project setting "String Identifiers must be unique in project" then the the renamed folder will be created in the destination project but any existing strings that already had been added to the destination will stay in their original folder. This behaviour may change in later versions. 
 
 If you have unchecked the  "String Identifiers must be unique in project" and allow non-unique ID then the new folder will be created and a new instance of the string will also be created. Any existing strings in the old folder will remain. This will lead to duplicates.
 
