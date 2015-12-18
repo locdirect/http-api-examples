@@ -1,6 +1,8 @@
 # http-api-examples
 Python examples of how to use LocalizeDirect's localization tool LocDirect HTTP(s) API usage 
 
+**The HTTP API only works on LocDirect server version 2.14.131 or later**
+
 Download the LocDirect API documentation [here](http://localizedirect.com/locdirect_downloads/)
 
 * Create project "SwedishSource"
