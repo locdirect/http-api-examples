@@ -246,7 +246,7 @@ If you plan to use the updater script for your project here’s a few things to 
 
 Folders will be created in the destination project but if the source project folder name is renamed, one of two things will happen:
 
-If you use the project setting "String Identifiers must be unique in project" then the the renamed folder will be created in the destination project but any existing strings that already had been added to the destination will stay in their original folder. This behaviour may change in later versions. 
+If you use the project setting "String Identifiers must be unique in project" then the the renamed folder will be created in the destination project and strings that are included in the update will be moved to the new folder. The old folder will remain as will any strings in the old folder that ws not included in the update. 
 
 If you have unchecked the  "String Identifiers must be unique in project" and allow non-unique ID then the new folder will be created and a new instance of the string will also be created. Any existing strings in the old folder will remain. This will lead to duplicates.
 
