@@ -87,7 +87,7 @@ def getProjectLanguagesMessage(secId, projectName):
 def getLanguages(secId, projectName):
     langs={}
     data = getProjectLanguagesMessage(secId, projectName)
-    r = requests.post(args['server'], data=data.encode('utf-8'), timeout=60)
+    r = requests.post(args['server'], data=data, timeout=60)
     tree = ET.ElementTree(ET.fromstring(r.text))
     root = tree.getroot()
     for item in root.findall('.//DATASET'):
@@ -98,7 +98,7 @@ def getLanguages(secId, projectName):
 def getTargetLanguages(secId, projectName, prep=''):
     langs=[]
     data = getProjectLanguagesMessage(secId, projectName)
-    r = requests.post(args['server'], data=data.encode('utf-8'), timeout=60)
+    r = requests.post(args['server'], data=data, timeout=60)
     tree = ET.ElementTree(ET.fromstring(r.text))
     root = tree.getroot()
     for item in root.findall('.//DATASET'):
@@ -109,7 +109,7 @@ def getTargetLanguages(secId, projectName, prep=''):
 # logs in the user and get the secId
 def login(user, password):
     data = loginMessage(user, password)
-    r = requests.post(args['server'], data=data.encode('utf-8'),  timeout=60)
+    r = requests.post(args['server'], data=data,  timeout=60)
 
     tree = ET.ElementTree(ET.fromstring(r.text))
     root = tree.getroot()
@@ -148,7 +148,7 @@ def main(args):
     fields = 'path;identifierName;sourceLanguageText;' + ';'.join(languages)
     data = stringExportMessage(secId, args['project'], fields)
     print "Reading fields: %s" % fields
-    r = requests.post(args['server'], data=data.encode('utf-8'), timeout=60)
+    r = requests.post(args['server'], data=data, timeout=60)
     r.encoding = 'utf-8'
 
     #print r.content
