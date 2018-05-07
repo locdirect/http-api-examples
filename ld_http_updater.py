@@ -1,6 +1,7 @@
 import argparse
 import requests
 import xml.etree.ElementTree as ET
+from xml.sax.saxutils import escape
 
 # When English is not the source language of a project a usual process is to translate it into English first and then
 # use the English as source for going into other languages. This introduces a new step in the localization process
@@ -86,7 +87,7 @@ def stringRawImportMessage(secId, projectName, fields, data):
              <createFolders>true</createFolders>
          </WHERE>
      </TASK>
-</EXECUTION>''' % (secId, fields, data, projectName)
+</EXECUTION>''' % (secId, fields, escape(data), projectName)
 
 
 # logs in the user and get the secId
@@ -154,7 +155,7 @@ def main(args):
         if item['status_' + args['language']] == '3':
             count += 1
             for map in fieldsMap:
-                prunedLDC += item[map].decode('utf-8') + COMPACT_FIELD_SEPARATOR
+                prunedLDC += item[map] + COMPACT_FIELD_SEPARATOR
             prunedLDC += COMPACT_ROW_SEPARATOR
 
     if count == 0:
@@ -171,6 +172,11 @@ def main(args):
         print "Strings imported"
     else:
         print "Error"
+
+        file=open('failed-message.txt','w')
+        file.write(message.encode('utf-8'))
+        file.close()
+
         print root.find(".//MESSAGE").text
         print r.text
         exit(1)
