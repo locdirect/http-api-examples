@@ -4,6 +4,7 @@ import codecs
 import requests
 import xml.etree.ElementTree as ET
 import csv
+from xml.sax.saxutils import escape
 
 # Example of reading a UTF-8 csv file and importing it into LocDirect
 # CSV fields should all be within double quotes like:
@@ -49,7 +50,7 @@ def stringImportMessage(secId, projectName, fields, data):
     fieldData = ""
     for row in data:
         for column in row:
-            fieldData += column.decode('utf-8') + COMPACT_FIELD_SEPARATOR
+            fieldData += escape(column.decode('utf-8')) + COMPACT_FIELD_SEPARATOR
         fieldData +=  COMPACT_ROW_SEPARATOR
     return '''<?xml version="1.0" encoding="UTF-8"?>
 <EXECUTION secId="%s" client="API" version="1.0">
